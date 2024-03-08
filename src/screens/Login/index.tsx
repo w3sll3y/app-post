@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import * as Styled from './styles';
 
 import logoImg from '../../assets/logo.png';
+import Toast from 'react-native-toast-message';
 
 export function Login() {
   const [name, setName] = useState('');
@@ -23,11 +24,14 @@ export function Login() {
   }
 
   async function handleLogin() {
-    if (name === '' && password === '') {
-      return console.log('precisa inserir login e senha');
+    if (name === '' || password === '') {
+      return Toast.show({
+        type: 'error',
+        text1: 'Preencha os dados',
+        text2: '✋Preencha login e senha!'
+      });
     }
     try {
-      console.log('aquii')
       const apiUrl = 'http://192.168.0.26/api_post/login/login';
       const headers = {
         'Content-Type': 'application/json',
@@ -43,18 +47,20 @@ export function Login() {
 
       const response = await axios.post(apiUrl, data, { headers });
 
-      console.log('data===', response)
       if (response?.data?.tipo === "sucesso") {
         setUser(response?.data?.resposta?.[1]?.[0]);
         const token = response?.data?.resposta?.[0];
         const id = response?.data?.resposta?.[1]?.[0]?.id;
-        console.log('token', token);
-        console.log('id', id);
-        AsyncStorage.setItem('token', JSON.stringify({ token, id }));
+        const name = response?.data?.resposta?.[1]?.[0]?.nome;
+        AsyncStorage.setItem('token', JSON.stringify({ token, id, name }));
         navigation.navigate('home');
       }
     } catch (err) {
-      console.log('err', err)
+      return Toast.show({
+        type: 'error',
+        text1: 'Erro ao acessar',
+        text2: 'Login ou senha invalidos!😔'
+      });
     }
   }
 
@@ -63,12 +69,12 @@ export function Login() {
       <Styled.Logo source={logoImg} />
       <Styled.ContainerForm>
         <Styled.InputType
-          placeholder='username'
+          placeholder='username*'
           onChangeText={text => setName(text)}
           value={name}
         />
         <Styled.InputType
-          placeholder='password'
+          placeholder='password*'
           secureTextEntry={true}
           value={password}
           onChangeText={text => setPassword(text)}

@@ -33,12 +33,12 @@ export const ButtonSendContainer = styled.View`
 export const ButtonSend = styled.TouchableOpacity<{ outline?: boolean }>`
   background-color: ${(props) => (props.outline ? 'transparent' : '#00B37E')};
   border-width: ${(props) => (props.outline ? '1px' : '0')};
-  border-color: ${(props) => (props.outline ? '#00B37E' : 'transparent')};
+  border-color: ${(props) => (props.outline ? '#F75A68' : 'transparent')};
   border-radius: 10px;
 
   padding: 10px 15px;
   margin: 10px 0;
-  width: 100%;
+  width: 80%;
 
   justify-content: center;
   align-items: center;
@@ -47,5 +47,5 @@ export const ButtonSend = styled.TouchableOpacity<{ outline?: boolean }>`
 export const TitleButton = styled.Text`
   font-size: 16px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
-  color: ${({ theme }) => theme.COLORS.GRAY_100};
+  color: ${({ theme }) => theme.COLORS.RED};
 `;

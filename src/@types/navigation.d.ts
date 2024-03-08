@@ -5,6 +5,7 @@ export declare global {
       signup: undefined;
       home: undefined;
       profile: undefined;
+      newPost: undefined;
     }
   }
 }

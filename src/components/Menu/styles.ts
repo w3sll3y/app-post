@@ -14,4 +14,7 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.COLORS.GRAY_100};
 `;
 
-export const Title = styled.Text``;
+export const ContainerIcon = styled.View`
+  margin: 0 15px;
+  padding: 0 35px;
+`;

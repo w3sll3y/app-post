@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
 
 export function SignUp() {
 
@@ -21,10 +22,13 @@ export function SignUp() {
 
   async function handleSignUp() {
     if (name === '' && login === '' && password === '') {
-      return console.log('precisa preencher os dados');
+      return Toast.show({
+        type: 'error',
+        text1: 'Preencha os dados',
+        text2: '✋Preencha nome, login e senha!'
+      });
     }
     try {
-      console.log('aquii')
       const apiUrl = 'http://192.168.0.26/api_post/usuarios/cadastrar';
       const headers = {
         'Content-Type': 'application/json',
@@ -41,12 +45,20 @@ export function SignUp() {
 
       const response = await axios.post(apiUrl, data, { headers });
 
-      console.log('data===', response)
       if (response?.data?.tipo === "sucesso") {
+        Toast.show({
+          type: 'success',
+          text1: 'Castro com sucesso',
+          text2: 'Castro com sucesso!👋'
+        });
         navigation.navigate('login');
       }
     } catch (err) {
-      console.log('err', err)
+      return Toast.show({
+        type: 'error',
+        text1: 'Erro ao cadastrar',
+        text2: 'Tente novamente!'
+      });
     }
   }
 
@@ -55,17 +67,17 @@ export function SignUp() {
       <Styled.Logo source={logoImg} />
       <Styled.ContainerForm>
         <Styled.InputType
-          placeholder='nome'
+          placeholder='nome*'
           onChangeText={text => setName(text)}
           value={name}
         />
         <Styled.InputType
-          placeholder='username'
+          placeholder='username*'
           onChangeText={text => setLogin(text)}
           value={login}
         />
         <Styled.InputType
-          placeholder='password'
+          placeholder='password*'
           secureTextEntry={true}
           value={password}
           onChangeText={text => setPassword(text)}

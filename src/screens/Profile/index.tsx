@@ -1,10 +1,15 @@
 import * as Styled from './styles';
 
-import logoImg from '../../assets/logo.png';
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+
+import logoImg from '../../assets/logo.png';
+
+import Menu from '../../components/Menu';
+import Header from '../../components/Header';
+import Toast from 'react-native-toast-message';
 
 export function Profile() {
 
@@ -37,24 +42,24 @@ export function Profile() {
         AsyncStorage.removeItem('token');
       }
     } catch (err) {
-      console.log('err', err)
+      return Toast.show({
+        type: 'error',
+        text1: 'Erro ao deslogar',
+        text2: 'Erro. Tente novamente!'
+      });
     }
   }
 
 
   return (
     <Styled.Container>
-      <Styled.Logo source={logoImg} />
-      <Styled.ButtonSend>
-        <Styled.TitleButton>
-          PROFILE
-        </Styled.TitleButton>
-      </Styled.ButtonSend>
+      <Header />
       <Styled.ButtonSend outline onPress={loggout}>
         <Styled.TitleButton>
           Logout
         </Styled.TitleButton>
       </Styled.ButtonSend>
+      <Menu />
     </Styled.Container>
   );
 };
