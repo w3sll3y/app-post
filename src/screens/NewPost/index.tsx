@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 import * as Styled from './styles';
 import Toast from 'react-native-toast-message';
+import { API_HOST } from '@env';
 
 import axios from 'axios';
 
@@ -38,7 +39,7 @@ export function NewPost() {
       });
     }
     try {
-      const apiUrl = 'http://192.168.0.26/api_post/posts/cadastrar/';
+      const apiUrl = `${API_HOST}/api_post/posts/cadastrar/`;
       const headers = {
         'authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',

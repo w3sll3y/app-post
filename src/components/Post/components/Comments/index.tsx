@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { AntDesign } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+import { API_HOST } from '@env';
 
 import CommentsComponent from "./components/Comments";
 import * as Styled from './styles';
@@ -16,7 +17,7 @@ export default function Comments({ id, childToParent, name }: number) {
 
   async function getComments() {
     try {
-      const apiUrl = `http://192.168.0.26/api_post/comentario/listar/${id}`;
+      const apiUrl = `${API_HOST}/api_post/comentario/listar/${id}`;
       const headers = {
         'authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -44,7 +45,7 @@ export default function Comments({ id, childToParent, name }: number) {
       });
     }
     try {
-      const apiUrl = `http://192.168.0.26/api_post/comentario/cadastrar`;
+      const apiUrl = `${API_HOST}/api_post/comentario/cadastrar`;
       const headers = {
         'authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',

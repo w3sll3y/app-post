@@ -1,8 +1,8 @@
 import * as Styled from './styles';
+import { API_HOST } from '@env';
 
 import logoImg from '../../assets/logo.png';
 import { useState } from 'react';
-import { TouchableOpacity, View } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
@@ -29,7 +29,7 @@ export function SignUp() {
       });
     }
     try {
-      const apiUrl = 'http://192.168.0.26/api_post/usuarios/cadastrar';
+      const apiUrl = `${API_HOST}/api_post/usuarios/cadastrar`;
       const headers = {
         'Content-Type': 'application/json',
         'User-Agent': 'okhttp/4.9.2',

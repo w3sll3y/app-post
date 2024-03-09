@@ -4,6 +4,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import * as Styled from './styles';
+import { API_HOST } from '@env';
 
 import logoImg from '../../assets/logo.png';
 import Toast from 'react-native-toast-message';
@@ -32,7 +33,7 @@ export function Login() {
       });
     }
     try {
-      const apiUrl = 'http://192.168.0.26/api_post/login/login';
+      const apiUrl = `${API_HOST}/api_post/login/login`;
       const headers = {
         'Content-Type': 'application/json',
         'User-Agent': 'okhttp/4.9.2',

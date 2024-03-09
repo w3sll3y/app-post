@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { API_HOST } from '@env';
 import axios from "axios";
 
 import * as Styled from './styles';
@@ -11,7 +12,7 @@ export default function GetUser({ id }: number) {
 
   async function getPosts() {
     try {
-      const apiUrl = `http://192.168.0.26/api_post/usuarios/listar/${id}`;
+      const apiUrl = `${API_HOST}/api_post/usuarios/listar/${id}`;
       const headers = {
         'authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',

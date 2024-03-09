@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
-import logoImg from '../../assets/logo.png';
+import { API_HOST } from '@env';
 
 import Menu from '../../components/Menu';
 import Header from '../../components/Header';
@@ -23,7 +23,7 @@ export function Profile() {
     const newToken = JSON.parse(storedUsername)?.token;
 
     try {
-      const apiUrl = 'http://192.168.0.26/api_post/login/logout';
+      const apiUrl = `${API_HOST}/api_post/login/logout`;
       const headers = {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',

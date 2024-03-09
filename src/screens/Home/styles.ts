@@ -52,7 +52,6 @@ export const TitleButton = styled.Text`
 
 export const FlatListContainer = styled.View`
   height: 100%;
-  z-index: 1000;
   margin-top: 250px;
   margin-top: 250px;
   width: 90%;

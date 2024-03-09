@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { FlatList } from 'react-native';
 import * as Styled from './styles';
+import { API_HOST } from '@env';
 import axios from 'axios';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -22,7 +23,7 @@ export function Home() {
 
   async function getPosts() {
     try {
-      const apiUrl = 'http://192.168.0.26/api_post/posts/listar/';
+      const apiUrl = `${API_HOST}/api_post/posts/listar/`;
       const headers = {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',

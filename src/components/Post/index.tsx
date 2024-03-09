@@ -5,6 +5,8 @@ import axios from 'axios';
 import Toast from 'react-native-toast-message';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { API_HOST } from '@env';
+
 import GetUser from "./components/GetUser";
 import Comments from './components/Comments';
 
@@ -44,7 +46,7 @@ export default function Post({
 
   async function handleUpdateLikes(numberLikes: number) {
     try {
-      const apiUrl = `http://192.168.0.26/api_post/posts/like/${id}`;
+      const apiUrl = `${API_HOST}/api_post/posts/like/${id}`;
       const headers = {
         'authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
