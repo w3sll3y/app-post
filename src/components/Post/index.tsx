@@ -1,9 +1,12 @@
 import * as Styled from './styles';
-import GetUser from "./components/GetUser";
 import { useEffect, useState } from "react";
+import { Modal } from 'react-native';
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import GetUser from "./components/GetUser";
+import Comments from './components/Comments';
 
 type Post = {
   id: number,
@@ -27,12 +30,16 @@ export default function Post({
   likes_count
 }: Post) {
   const [token, setToken] = useState('');
+  const [name, setName] = useState('');
   const [liked, setLiked] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+
   const [countLiked, setCounLikes] = useState<Number>(Number(likes_count));
 
   async function getUser() {
     const storedUsername = await AsyncStorage.getItem('token');
     setToken(JSON.parse(storedUsername)?.token);
+    setName(JSON.parse(storedUsername)?.name);
   }
 
   async function handleUpdateLikes(numberLikes: number) {
@@ -47,9 +54,7 @@ export default function Post({
         likes_count: String(numberLikes),
       }
 
-      console.log('aqui', String(numberLikes))
       const response = await axios.put(apiUrl, data, { headers });
-      console.log('resp', response);
       if (response?.data?.tipo === "sucesso") {
         // showToast();
       }
@@ -65,13 +70,11 @@ export default function Post({
   function handleLikeUnliked() {
     let totalLikes = Number(countLiked);
     if (liked === false) {
-      console.log(liked)
       totalLikes++;
       setCounLikes(totalLikes);
       handleUpdateLikes(totalLikes);
     }
     if (liked === true) {
-      console.log(liked)
       totalLikes = totalLikes - 1;
       setCounLikes(totalLikes);
       handleUpdateLikes(totalLikes);
@@ -79,12 +82,18 @@ export default function Post({
     setLiked(!liked)
   }
 
+  const handleShowModal = () => {
+    setModalVisible(true)
+  }
+  const childToParent = () => {
+    setModalVisible(false)
+  }
   useEffect(() => {
     getUser();
   }, []);
 
   return (
-    <Styled.Container>
+    <Styled.Container onPress={handleShowModal}>
       <Styled.Title>{title}</Styled.Title>
       <Styled.Description>{description}</Styled.Description>
       <GetUser id={idAuthor} />
@@ -97,6 +106,13 @@ export default function Post({
           onPress={handleLikeUnliked}
         />
       </Styled.LikedContainer>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+      >
+        <Comments childToParent={childToParent} id={id} name={name} />
+      </Modal>
     </Styled.Container>
   );
 }

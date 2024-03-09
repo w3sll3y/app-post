@@ -1,20 +1,45 @@
 import styled from "styled-components/native";
 
-export const Container = styled.View`
-  flex: 1;
-  background-color: ${({ theme }) => theme.COLORS.GRAY_600};
-  align-items: center;
+export const ContainerModal = styled.View`
   justify-content: center;
+  align-items: center;
+  flex: 1;
 `;
 
-export const Logo = styled.Image`
-  width: 180px;
-  height: 255px;
+export const Container = styled.View`
+  margin-top: 10px;
+  width: 90%;
+  background-color: #C4C4CC;
+  border-radius: 25px;
+  position: relative;
+  height: 550px;
 `;
 
-export const ContainerForm = styled.View`
-  background-color: ${({ theme }) => theme.COLORS.GRAY_600};
-  width: 300px;
+export const CloseContainer = styled.View`
+  position: absolute;
+  right: 15px;
+  top: 15px;
+`;
+
+export const Title = styled.Text`
+  font-style: italic;
+  text-align: center;
+  margin-top: 15px;
+  font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
+  font-size: ${({ theme }) => theme.FONT_SIZE.LG};
+`;
+
+export const FlatListContainer = styled.View`
+  height: 350px;
+  max-height: 350px;
+  margin-top: 15px;
+`;
+
+export const CommentContainer = styled.View`
+  max-width: 100%;
+  padding: 0 5%;
+  align-content: center;
+  justify-content: center;
 `;
 
 export const InputType = styled.TextInput`
@@ -24,10 +49,6 @@ export const InputType = styled.TextInput`
   font-size: 16px;
   border-radius: 10px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
-`;
-
-export const ButtonSendContainer = styled.View`
-  margin-top: 15px;
 `;
 
 export const ButtonSend = styled.TouchableOpacity<{ outline?: boolean }>`
@@ -48,12 +69,4 @@ export const TitleButton = styled.Text`
   font-size: 16px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
   color: ${({ theme }) => theme.COLORS.GRAY_100};
-`;
-
-export const FlatListContainer = styled.View`
-  height: 100%;
-  z-index: 1000;
-  margin-top: 250px;
-  margin-top: 250px;
-  width: 90%;
 `;
